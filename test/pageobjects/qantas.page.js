@@ -1,23 +1,42 @@
 class Qantas {
-  // 方法来打开Qantas主页
   async open() {
     await browser.url("https://www.qantas.com/au/en.html");
   }
 
-  // 获取Qantas徽标元素
+  // A. Develop tests for validation the Qantas logo and login button is displayed on (desktop/Tablet/mobile)
   get logo() {
     return $(".Logo__logoQantas_vaH1iatF");
   }
 
-  // 获取登录按钮元素
   get loginButton() {
     return $(".login-ribbon");
+  }
+
+  // B. Develop test for Member login --- Negative
+  get login_form() {
+    return $(".login-widget");
+  }
+
+  get login_form_submit_btn() {
+    return $(".ql-login-submit-button");
+  }
+
+  get login_error_msg() {
+    return $(".ql-login-error");
   }
 
   get input() {
     return $('[data-testid="InlineDialog-Dialog"] input');
   }
 
+  get lang_switch_btn() {
+    return $(".DesktopRegionSelector__inputContainer_FVhpvqxU");
+  }
+
+  get lang_list() {
+    return $("#downshift-:R54:-menu");
+  }
+  // C. Develop tests for searching flights
   // Departure
   get departure() {
     return $('[data-testid="departure-port"]');
@@ -55,14 +74,6 @@ class Qantas {
 
   get list_of_flights() {
     return $(".list-of-flights");
-  }
-
-  get lang_switch_btn() {
-    return $(".DesktopRegionSelector__inputContainer_FVhpvqxU");
-  }
-
-  get lang_list() {
-    return $("#downshift-:R54:-menu");
   }
 }
 

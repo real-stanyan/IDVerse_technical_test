@@ -69,29 +69,22 @@ describe("Qantas Tests", () => {
     await browser.setWindowSize(1024, 768);
   });
 
-  // B. Develop tests for language switch function
-  //   it("1B. Tests for language switch function", async () => {
-  //     const checkList = [
-  //       "Brazil (English)",
-  //       "United States (English)",
-  //       "United Kingdom (English)",
-  //       "South Korea (English)",
-  //       "Japan (English)",
-  //     ];
+  // B. Develop test for Member login --- Negative
+  it("1B. Tests for Member login --- Negative", async () => {
+    Qantas.loginButton.click();
+    await Qantas.login_form.waitForDisplayed({ timeout: 10000 });
+    await Qantas.login_form_submit_btn.waitForDisplayed({ timeout: 10000 });
 
-  //     for (let i = 0; i < checkList.length; i++) {
-  //       Qantas.lang_switch_btn.click();
-  //       await Qantas.lang_list.waitForDisplayed({ timeout: 1000 });
-  //       const link = await $(
-  //         '.DesktopRegionSelector__dropdownItem_kHilgWC3 a[href="/au/en.html"]'
-  //       );
-  //       await link.waitForClickable({ timeout: 1000 });
-  //       await link.click();
-  //     }
-  //   });
+    Qantas.login_form_submit_btn.click();
+    await browser.pause(1000);
 
-  // C. Develop tests for Navbar navigation function
-  //   it("1C. Tests for Navbar navigation function", async () => {});
+    let isErrorMsgDisplayed = await Qantas.login_error_msg.isDisplayed();
+
+    expect(
+      isErrorMsgDisplayed,
+      "Expected login error message to be displayed, but it wasn't."
+    ).to.be.true;
+  });
 
   // C. Develop tests for searching flights
   it("1D. Tests for searching flights", async () => {
