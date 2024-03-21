@@ -156,4 +156,30 @@ describe("Booking API Tests", function () {
 
     expect(response.status).to.equal(404);
   });
+
+  //   D. DeleteBooking Test --- Positive
+  it("Delete Booking - Positive", async function () {
+    const response = await fetch(`${apiUrl}/booking/${bookingID}`, {
+      method: "DELETE",
+      headers: {
+        Cookie: `token=${token}`,
+      },
+    });
+
+    expect(response.status).to.equal(201);
+  });
+
+  //   D. DeleteBooking Test --- Negative
+  it("Delete Booking - Negative", async function () {
+    const nonExistentBookingId = 99999;
+
+    const response = await fetch(`${apiUrl}/booking/${nonExistentBookingId}`, {
+      method: "DELETE",
+      headers: {
+        Cookie: `token=${token}`,
+      },
+    });
+
+    expect(response.status).to.not.equal(200);
+  });
 });
