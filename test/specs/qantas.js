@@ -28,8 +28,25 @@ describe("Qantas Tests", () => {
   });
   // A. Develop tests for validation the Qantas logo and login button is displayed
   it("1A. Tests for validation the Qantas logo and login button is displayed", async () => {
-    expect(await Qantas.logo.isDisplayed()).to.be.true;
-    expect(await Qantas.loginButton.isDisplayed()).to.be.true;
+    const logoIsDisplayed = await Qantas.logo.isDisplayed();
+    expect(logoIsDisplayed, "Qantas logo is not displayed").to.be.true;
+
+    const loginButtonIsDisplayed = await Qantas.loginButton.isDisplayed();
+    expect(loginButtonIsDisplayed, "Login button is not displayed").to.be.true;
+
+    const logoPosition = await Qantas.logo.getLocation();
+    expect(logoPosition.x).to.be.above(0, "Logo X position is not as expected");
+    expect(logoPosition.y).to.be.above(0, "Logo Y position is not as expected");
+
+    const loginButtonPosition = await Qantas.loginButton.getLocation();
+    expect(loginButtonPosition.x).to.be.above(
+      0,
+      "Login button X position is not as expected"
+    );
+    expect(loginButtonPosition.y).to.be.above(
+      0,
+      "Login button Y position is not in not as expected"
+    );
   });
 
   // B. Develop tests for searching flights
