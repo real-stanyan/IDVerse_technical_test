@@ -128,4 +128,32 @@ describe("Booking API Tests", function () {
 
     expect(response.status).to.not.equal(200);
   });
+
+  //   C. GetBooking Test --- Positive
+  it("3C. Get Booking - Positive", async function () {
+    const response = await fetch(`${apiUrl}/booking/${bookingID}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    expect(response.status).to.equal(200);
+    const data = await response.json();
+    console.log(data);
+  });
+
+  //   C. GetBooking Test --- Negative
+  it("3C. Get Booking - Negative", async function () {
+    const nonExistentBookingId = 99999;
+
+    const response = await fetch(`${apiUrl}/booking/${nonExistentBookingId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    expect(response.status).to.equal(404);
+  });
 });
