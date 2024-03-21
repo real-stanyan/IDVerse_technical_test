@@ -56,6 +56,14 @@ class Qantas {
   get list_of_flights() {
     return $(".list-of-flights");
   }
+
+  get lang_switch_btn() {
+    return $(".DesktopRegionSelector__inputContainer_FVhpvqxU");
+  }
+
+  get lang_list() {
+    return $("#downshift-:R54:-menu");
+  }
 }
 
 export default new Qantas();
