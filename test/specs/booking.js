@@ -28,7 +28,7 @@ describe("Booking API Tests", function () {
   createAuthToken();
 
   //   A. CreateBooking Test --- Positive
-  it("CreateBooking Test --- Positive", async function () {
+  it("2A. CreateBooking Test --- Positive", async function () {
     const bookingData = {
       firstname: "Stan",
       lastname: "yan",
@@ -56,7 +56,7 @@ describe("Booking API Tests", function () {
   });
 
   //   A. CreateBooking Test --- Negative
-  it("CreateBooking Test --- Negative", async function () {
+  it("2A. CreateBooking Test --- Negative", async function () {
     const invalidBookingData = {
       firstname: 123,
       lastname: 123,
@@ -75,6 +75,55 @@ describe("Booking API Tests", function () {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(invalidBookingData),
+    });
+
+    expect(response.status).to.not.equal(200);
+  });
+
+  //   B. UpdateBooking Test --- Positive
+  it("2B. Update Booking - Positive", async function () {
+    const updateData = {
+      firstname: "wenyao",
+      lastname: "yan",
+      totalprice: 321,
+      depositpaid: true,
+      bookingdates: {
+        checkin: "2024-02-01",
+        checkout: "2024-02-02",
+      },
+      additionalneeds: "lunch",
+    };
+
+    const response = await fetch(`${apiUrl}/booking/${bookingID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Cookie: `token=${token}`,
+      },
+      body: JSON.stringify(updateData),
+    });
+
+    expect(response.status).to.equal(200);
+    if (response.status === 200) {
+      const data = await response.json();
+      expect(data).to.deep.include(updateData);
+    }
+  });
+
+  //   B. UpdateBooking Test --- Negative
+  it("2B. Update Booking - Negative", async function () {
+    const invalidBookingId = "nonexistent_booking_id";
+    const invalidToken = "invalid_auth_token";
+    const updateData = {};
+
+    const response = await fetch(`${apiUrl}/booking/${invalidBookingId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `token=${invalidToken}`,
+      },
+      body: JSON.stringify(updateData),
     });
 
     expect(response.status).to.not.equal(200);
