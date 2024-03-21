@@ -54,4 +54,29 @@ describe("Booking API Tests", function () {
     expect(response.status).to.equal(200);
     expect(data.booking).to.deep.include(bookingData);
   });
+
+  //   A. CreateBooking Test --- Negative
+  it("CreateBooking Test --- Negative", async function () {
+    const invalidBookingData = {
+      firstname: 123,
+      lastname: 123,
+      totalprice: "111",
+      depositpaid: "111",
+      bookingdates: {
+        checkin: "2024-01-01",
+        checkout: "2024-01-2",
+      },
+      additionalneeds: "lunch",
+    };
+
+    const response = await fetch(`${apiUrl}/booking`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(invalidBookingData),
+    });
+
+    expect(response.status).to.not.equal(200);
+  });
 });
