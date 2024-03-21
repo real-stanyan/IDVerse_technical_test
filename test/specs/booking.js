@@ -130,7 +130,7 @@ describe("Booking API Tests", function () {
   });
 
   //   C. GetBooking Test --- Positive
-  it("3C. Get Booking - Positive", async function () {
+  it("2C. Get Booking - Positive", async function () {
     const response = await fetch(`${apiUrl}/booking/${bookingID}`, {
       method: "GET",
       headers: {
@@ -144,7 +144,7 @@ describe("Booking API Tests", function () {
   });
 
   //   C. GetBooking Test --- Negative
-  it("3C. Get Booking - Negative", async function () {
+  it("2C. Get Booking - Negative", async function () {
     const nonExistentBookingId = 99999;
 
     const response = await fetch(`${apiUrl}/booking/${nonExistentBookingId}`, {
@@ -158,7 +158,7 @@ describe("Booking API Tests", function () {
   });
 
   //   D. DeleteBooking Test --- Positive
-  it("Delete Booking - Positive", async function () {
+  it("2D. Delete Booking - Positive", async function () {
     const response = await fetch(`${apiUrl}/booking/${bookingID}`, {
       method: "DELETE",
       headers: {
@@ -170,7 +170,7 @@ describe("Booking API Tests", function () {
   });
 
   //   D. DeleteBooking Test --- Negative
-  it("Delete Booking - Negative", async function () {
+  it("2D. Delete Booking - Negative", async function () {
     const nonExistentBookingId = 99999;
 
     const response = await fetch(`${apiUrl}/booking/${nonExistentBookingId}`, {
