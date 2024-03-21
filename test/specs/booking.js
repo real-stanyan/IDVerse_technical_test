@@ -5,6 +5,28 @@ describe("Booking API Tests", function () {
   let bookingID = 0;
   let token = 0;
 
+  // create token
+  async function createAuthToken() {
+    const response = await fetch("https://restful-booker.herokuapp.com/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: "admin",
+        password: "password123",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to create auth token: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    token = data.token;
+  }
+  createAuthToken();
+
   //   A. CreateBooking Test --- Positive
   it("CreateBooking Test --- Positive", async function () {
     const bookingData = {
