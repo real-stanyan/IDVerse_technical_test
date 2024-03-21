@@ -87,7 +87,7 @@ describe("Qantas Tests", () => {
   });
 
   // C. Develop tests for searching flights
-  it("1D. Tests for searching flights", async () => {
+  it("1C. Tests for searching flights", async () => {
     Qantas.search_container.click();
     await Qantas.search_btn.click();
     // set departure and arrival
